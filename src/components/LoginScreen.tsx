@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth, type UserRole } from '../context/AuthContext';
-import { Lock, ArrowRight, Activity, Stethoscope, Briefcase, CheckCircle2, Sparkles } from 'lucide-react';
+import { Lock, ArrowRight, Activity, Stethoscope, Briefcase, CheckCircle2, Sparkles, X } from 'lucide-react';
 
 export const LoginScreen = () => {
   const { login } = useAuth();
@@ -14,7 +14,7 @@ export const LoginScreen = () => {
     if (phone.length > 5) {
       setStep('otp');
       setShowOtpNotification(true);
-      setTimeout(() => setShowOtpNotification(false), 5000);
+      setTimeout(() => setShowOtpNotification(false), 15000); // 15 segundos para poder leer el código
     }
   };
 
@@ -42,17 +42,24 @@ export const LoginScreen = () => {
       
       {/* OTP Toast */}
       {showOtpNotification && (
-        <div className="fixed top-4 right-4 w-80 bg-white rounded-2xl shadow-2xl border-l-4 border-green-500 p-5 flex gap-4 animate-slide-in z-50 backdrop-blur-sm bg-white/95">
-          <div className="bg-gradient-to-br from-green-400 to-green-500 p-3 rounded-xl shadow-lg">
+        <div className="fixed top-4 right-4 w-80 bg-white rounded-2xl shadow-2xl border-l-4 border-green-500 p-5 flex gap-4 animate-slide-in z-[9999] relative" style={{ backgroundColor: 'white', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
+          <button
+            onClick={() => setShowOtpNotification(false)}
+            className="absolute top-2 right-2 p-1 rounded-full hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
+            aria-label="Cerrar"
+          >
+            <X className="w-4 h-4" />
+          </button>
+          <div className="bg-gradient-to-br from-green-400 to-green-500 p-3 rounded-xl shadow-lg flex-shrink-0">
             <CheckCircle2 className="w-6 h-6 text-white" />
           </div>
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 pr-4">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="w-4 h-4 text-green-500 flex-shrink-0" />
               <h4 className="font-bold text-gray-900 text-sm">WhatsApp</h4>
             </div>
             <p className="text-sm text-gray-700">Código ClinicaIA:</p>
-            <p className="text-lg font-black text-gray-900 tracking-wider mt-1">123456</p>
+            <p className="text-2xl font-black text-gray-900 tracking-wider mt-2" style={{ letterSpacing: '0.2em' }}>123456</p>
           </div>
         </div>
       )}
@@ -63,10 +70,7 @@ export const LoginScreen = () => {
           
           {/* Header */}
           <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 p-8 text-center relative overflow-hidden" style={{ boxSizing: 'border-box' }}>
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)]" style={{ backgroundSize: '20px 20px' }}></div>
-            </div>
-            <div className="absolute inset-0 shimmer opacity-30"></div>
+            {/* Removed diagonal lines pattern - kept clean gradient background */}
             
             <div className="relative z-10">
               <div className="mx-auto bg-white/20 w-20 h-20 rounded-3xl rotate-3 flex items-center justify-center mb-6 backdrop-blur-md shadow-glow border-2 border-white/30 transition-transform hover:rotate-6">
