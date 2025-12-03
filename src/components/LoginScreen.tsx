@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth, type UserRole } from '../context/AuthContext';
-import { Phone, Lock, ArrowRight, Activity, Stethoscope, Briefcase, CheckCircle2 } from 'lucide-react';
+import { Lock, ArrowRight, Activity, Stethoscope, Briefcase, CheckCircle2 } from 'lucide-react';
 
 export const LoginScreen = () => {
   const { login } = useAuth();
