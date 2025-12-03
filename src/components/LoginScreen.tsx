@@ -48,7 +48,7 @@ export const LoginScreen = () => {
                 <Activity className="w-10 h-10 text-white -rotate-3 drop-shadow-lg" />
               </div>
               <h1 className="text-3xl font-black text-white mb-3 tracking-tight drop-shadow-lg">
-                ClinicaIA
+                Cliix
               </h1>
               <p className="text-blue-100 font-medium text-sm tracking-wide">
                 Plataforma Médica Inteligente
@@ -186,7 +186,7 @@ export const LoginScreen = () => {
           {/* Footer */}
           <div className="bg-gradient-to-r from-slate-50 to-gray-50 border-t border-slate-200/50 px-8 py-5 text-center">
             <p className="text-xs text-slate-500 font-semibold tracking-wide">
-              ClinicaIA Secure Access • v2.0.0
+              Cliix Secure Access • v2.0.0
             </p>
           </div>
         </div>

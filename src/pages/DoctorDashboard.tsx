@@ -202,7 +202,7 @@ export const DoctorDashboard = () => {
           </div>
           <div>
             <h1 className="font-black text-white text-xl tracking-tight drop-shadow-lg">
-              ClinicaIA <span className="font-normal text-blue-100">| Médico</span>
+              Cliix <span className="font-normal text-blue-100">| Médico</span>
             </h1>
             <p className="text-xs text-blue-100/80 font-medium mt-0.5">Asistente Inteligente Clínico</p>
           </div>

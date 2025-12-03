@@ -108,7 +108,7 @@ export const AdminDashboard = () => {
           </div>
           <div>
             <h1 className="font-black text-white text-xl tracking-tight drop-shadow-lg">
-              ClinicaIA <span className="font-normal text-emerald-100">| Analytics</span>
+              Cliix <span className="font-normal text-emerald-100">| Analytics</span>
             </h1>
             <p className="text-xs text-emerald-100/80 font-medium mt-0.5">Análisis Inteligente de Datos</p>
           </div>
