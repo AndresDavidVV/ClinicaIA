@@ -3,7 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { LoginScreen } from './components/LoginScreen';
 import { DoctorDashboard } from './pages/DoctorDashboard';
 import { AdminDashboard } from './pages/AdminDashboard';
-import { ReferidosPage } from './pages/ReferidosPage';
+import { ReferenciasPage } from './pages/ReferenciasPage';
 
 const AppContent = () => {
   const { user } = useAuth();
@@ -12,7 +12,7 @@ const AppContent = () => {
     return (
       <Routes>
         <Route path="/" element={<LoginScreen />} />
-        <Route path="/referidos" element={<ReferidosPage />} />
+        <Route path="/referencias" element={<ReferenciasPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     );

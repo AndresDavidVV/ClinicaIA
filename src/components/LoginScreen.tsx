@@ -187,11 +187,11 @@ export const LoginScreen = () => {
           {/* Footer */}
           <div className="bg-gradient-to-r from-slate-50 to-gray-50 border-t border-slate-200/50 px-8 py-5 text-center space-y-3">
             <Link
-              to="/referidos"
+              to="/referencias"
               className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-semibold transition-colors hover:underline"
             >
               <Users className="w-4 h-4" />
-              Ver Referidos
+              Ver Referencias
             </Link>
             <p className="text-xs text-slate-500 font-semibold tracking-wide">
               Cliix Secure Access • v2.0.0

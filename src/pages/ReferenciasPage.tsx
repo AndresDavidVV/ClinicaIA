@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Phone, Building2, Users } from 'lucide-react';
 
-interface Referido {
+interface Referencia {
   name: string;
   phone: string;
   institution?: string;
 }
 
-const REFERIDOS: Referido[] = [
+const REFERENCIAS: Referencia[] = [
   {
     name: 'Stephanie Lavaux',
     phone: '321 348 7145',
@@ -28,7 +28,7 @@ const REFERIDOS: Referido[] = [
   }
 ];
 
-export const ReferidosPage = () => {
+export const ReferenciasPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-6 sm:p-8 relative overflow-hidden">
       {/* Animated background elements */}
@@ -49,56 +49,55 @@ export const ReferidosPage = () => {
                 <Users className="w-10 h-10 text-white -rotate-3 drop-shadow-lg" />
               </div>
               <h1 className="text-3xl font-black text-white mb-3 tracking-tight drop-shadow-lg">
-                Referidos
+                Referencias
               </h1>
-              <p className="text-blue-100 font-medium text-sm tracking-wide">
-                Nuestros Colaboradores
-              </p>
             </div>
           </div>
 
           {/* Content Area */}
-          <div className="p-8 sm:p-10 bg-white/50">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              {REFERIDOS.map((referido, index) => (
-                <div
-                  key={index}
-                  className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 border border-blue-100/50 shadow-deep hover:shadow-deep-lg hover:scale-[1.02] transition-all duration-300 card-modern animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="bg-gradient-to-br from-blue-100 to-indigo-100 p-3 rounded-xl shadow-soft flex-shrink-0">
-                      <Users className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-black text-xl text-gray-900 mb-3">
-                        {referido.name}
-                      </h3>
-                      
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2 text-gray-700">
-                          <Phone className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                          <a
-                            href={`tel:${referido.phone.replace(/\s/g, '')}`}
-                            className="text-sm font-semibold hover:text-blue-600 transition-colors"
-                          >
-                            {referido.phone}
-                          </a>
-                        </div>
+          <div className="p-6 sm:p-8 lg:p-10 bg-white/50">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 justify-items-center">
+                {REFERENCIAS.map((referencia, index) => (
+                  <div
+                    key={index}
+                    className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-2xl p-6 border border-blue-100/50 shadow-deep hover:shadow-deep-lg hover:scale-[1.02] transition-all duration-300 card-modern animate-fade-in"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="bg-gradient-to-br from-blue-100 to-indigo-100 p-3 rounded-xl shadow-soft flex-shrink-0">
+                        <Users className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-black text-lg sm:text-xl text-gray-900 mb-3 break-words">
+                          {referencia.name}
+                        </h3>
                         
-                        {referido.institution && (
-                          <div className="flex items-center gap-2">
-                            <Building2 className="w-4 h-4 text-indigo-600 flex-shrink-0" />
-                            <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200">
-                              {referido.institution}
-                            </span>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2 text-gray-700 flex-wrap">
+                            <Phone className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                            <a
+                              href={`tel:${referencia.phone.replace(/\s/g, '')}`}
+                              className="text-sm font-semibold hover:text-blue-600 transition-colors break-all"
+                            >
+                              {referencia.phone}
+                            </a>
                           </div>
-                        )}
+                          
+                          {referencia.institution && (
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <Building2 className="w-4 h-4 text-indigo-600 flex-shrink-0" />
+                              <span className="inline-block px-3 py-1 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-200 break-words">
+                                {referencia.institution}
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Back Button */}
