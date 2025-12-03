@@ -58,7 +58,7 @@ export const LoginScreen = () => {
         </div>
       )}
 
-      <div className="relative z-10 w-full max-w-md">
+      <div className="relative z-10 w-full max-w-lg lg:w-[30vw] min-w-[320px]">
         {/* Main Card with Glassmorphism */}
         <div className="glass bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/50 animate-scale-in">
           {/* Header with enhanced gradient */}
@@ -88,7 +88,7 @@ export const LoginScreen = () => {
           {/* Content Area */}
           <div className="p-8 bg-white/50">
             {step === 'phone' && (
-              <form onSubmit={handlePhoneSubmit} className="space-y-6 animate-fade-in">
+              <form onSubmit={handlePhoneSubmit} className="space-y-6 animate-fade-in max-w-sm mx-auto">
                 <div className="text-center mb-4">
                   <h2 className="text-2xl font-black text-slate-900 mb-1">Acceso Seguro</h2>
                   <p className="text-slate-500 text-sm">Ingresa tu móvil para recibir el código</p>
@@ -126,7 +126,7 @@ export const LoginScreen = () => {
             )}
 
             {step === 'otp' && (
-              <form onSubmit={handleOtpSubmit} className="space-y-6 animate-fade-in">
+              <form onSubmit={handleOtpSubmit} className="space-y-6 animate-fade-in max-w-sm mx-auto">
                 <div className="text-center mb-6">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
                     <Lock className="w-8 h-8 text-blue-600" />
@@ -181,7 +181,7 @@ export const LoginScreen = () => {
             )}
 
             {step === 'role' && (
-              <div className="space-y-4 animate-fade-in">
+              <div className="space-y-4 animate-fade-in max-w-sm mx-auto">
                 <div className="text-center mb-6">
                   <h2 className="text-2xl font-black text-slate-900 mb-1">Selecciona tu Perfil</h2>
                   <p className="text-slate-500 text-sm">Elige el módulo al que deseas ingresar</p>
