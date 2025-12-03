@@ -207,15 +207,15 @@ export const DoctorDashboard = () => {
             <p className="text-xs text-blue-100/80 font-medium mt-0.5">Asistente Inteligente Clínico</p>
           </div>
         </div>
-        <div className="flex items-center gap-4 relative z-10">
-          <form onSubmit={searchPatient} className="relative hidden lg:block">
+        <div className="flex items-center gap-4 relative z-10 flex-1">
+          <form onSubmit={searchPatient} className="relative flex-1 max-w-md">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-300" />
             <input
               type="text"
               value={cedula}
               onChange={(e) => setCedula(e.target.value)}
               placeholder="Buscar paciente por cédula (ej: 1002)"
-              className="w-96 pl-12 pr-4 py-2.5 bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl focus:ring-4 focus:ring-blue-400/30 focus:border-white/50 focus:bg-white/30 outline-none text-white placeholder:text-blue-100/70 text-sm font-medium shadow-soft transition-all"
+              className="w-full pl-12 pr-4 py-2.5 bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-2xl focus:ring-4 focus:ring-blue-400/30 focus:border-white/50 focus:bg-white/30 outline-none text-white placeholder:text-blue-100/70 text-sm font-medium shadow-soft transition-all"
             />
           </form>
           <div className="flex items-center gap-4 border-l border-white/20 pl-6">
