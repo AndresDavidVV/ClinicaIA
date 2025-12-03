@@ -1,20 +1,17 @@
 import { useState } from 'react';
 import { useAuth, type UserRole } from '../context/AuthContext';
-import { Lock, ArrowRight, Activity, Stethoscope, Briefcase, CheckCircle2, Sparkles, X } from 'lucide-react';
+import { Lock, ArrowRight, Activity, Stethoscope, Briefcase } from 'lucide-react';
 
 export const LoginScreen = () => {
   const { login } = useAuth();
   const [step, setStep] = useState<'phone' | 'otp' | 'role'>('phone');
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
-  const [showOtpNotification, setShowOtpNotification] = useState(false);
 
   const handlePhoneSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (phone.length > 5) {
       setStep('otp');
-      setShowOtpNotification(true);
-      setTimeout(() => setShowOtpNotification(false), 15000); // 15 segundos para poder leer el código
     }
   };
 
@@ -39,30 +36,6 @@ export const LoginScreen = () => {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
-      
-      {/* OTP Toast */}
-      {showOtpNotification && (
-        <div className="fixed top-4 right-4 w-80 bg-white rounded-2xl shadow-2xl border-l-4 border-green-500 p-5 flex gap-4 animate-slide-in z-[9999] relative" style={{ backgroundColor: 'white', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
-          <button
-            onClick={() => setShowOtpNotification(false)}
-            className="absolute top-2 right-2 p-1 rounded-full hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-600"
-            aria-label="Cerrar"
-          >
-            <X className="w-4 h-4" />
-          </button>
-          <div className="bg-gradient-to-br from-green-400 to-green-500 p-3 rounded-xl shadow-lg flex-shrink-0">
-            <CheckCircle2 className="w-6 h-6 text-white" />
-          </div>
-          <div className="flex-1 min-w-0 pr-4">
-            <div className="flex items-center gap-2 mb-1">
-              <Sparkles className="w-4 h-4 text-green-500 flex-shrink-0" />
-              <h4 className="font-bold text-gray-900 text-sm">WhatsApp</h4>
-            </div>
-            <p className="text-sm text-gray-700">Código ClinicaIA:</p>
-            <p className="text-2xl font-black text-gray-900 tracking-wider mt-2" style={{ letterSpacing: '0.2em' }}>123456</p>
-          </div>
-        </div>
-      )}
 
       {/* Main Container - Fixed width */}
       <div className="relative z-10" style={{ width: '100%', maxWidth: '420px' }}>
@@ -164,15 +137,7 @@ export const LoginScreen = () => {
                   Verificar Acceso <ArrowRight className="w-5 h-5" />
                 </button>
                 
-                <div className="text-center space-y-3">
-                  <button 
-                    type="button" 
-                    onClick={() => setShowOtpNotification(true)}
-                    className="text-sm text-blue-600 hover:text-blue-700 font-semibold underline underline-offset-2 transition-colors"
-                  >
-                    Reenviar código SMS
-                  </button>
-                  
+                <div className="text-center">
                   <button 
                     type="button" 
                     onClick={() => setStep('phone')}
