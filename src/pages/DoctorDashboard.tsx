@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { getAIOpinion } from '../lib/openai';
-import { LogOut, Search, User, FileText, AlertTriangle, Brain, ChevronRight } from 'lucide-react';
+import { LogOut, Search, User, FileText, Brain } from 'lucide-react';
 
 export const DoctorDashboard = () => {
   const { logout, user } = useAuth();
@@ -38,7 +38,7 @@ export const DoctorDashboard = () => {
       setPatient(patients);
 
       // Fetch Records
-      const { data: recs, error: rError } = await supabase
+      const { data: recs, error: _rError } = await supabase
         .from('medical_records')
         .select('*')
         .eq('patient_id', patients.id)

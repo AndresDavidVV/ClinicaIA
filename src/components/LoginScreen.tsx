@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useAuth, UserRole } from '../context/AuthContext';
+import { useState } from 'react';
+import { useAuth, type UserRole } from '../context/AuthContext';
 import { Phone, Lock, ArrowRight, Activity, Stethoscope, Briefcase } from 'lucide-react';
 
 export const LoginScreen = () => {

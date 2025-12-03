@@ -107,7 +107,7 @@ El paciente presenta un **Síndrome Metabólico** en evolución.
 El historial clínico ha sido procesado. No detecto banderas rojas inmediatas basándome en los datos limitados, pero sugiero completar la historia clínica con antecedentes familiares y exámenes recientes.`;
 };
 
-const mockAdminResponse = (query: string) => {
+const mockAdminResponse = (_query: string) => {
     return {
         text: "Modo Simulación: No se detectó API Key o hubo error. SQL Simulado: `SELECT count(*) FROM patients` -> Resultado: 42",
         type: 'mock'

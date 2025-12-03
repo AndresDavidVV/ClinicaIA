@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { getAdminSQLAnalysis } from '../lib/openai';
-import { LogOut, Send, Database, BarChart2, Server, MessageSquare, Loader2 } from 'lucide-react';
+import { LogOut, Send, Database, BarChart2, Server, Loader2, User as UserIcon } from 'lucide-react';
 
 // Schema definition for the AI to understand
 const DB_SCHEMA = `
@@ -61,15 +61,16 @@ export const AdminDashboard = () => {
       // 1. Generate SQL
       const result = await getAdminSQLAnalysis(userMsg.content, DB_SCHEMA);
       
-      // 2. Simulate Execution (Since we can't run raw SQL from client without RPC)
-      // We generate a "fake" result based on the query context to show the UX.
+      // 2. Simulate Execution
       const simulatedData = simulateDataResult(userMsg.content);
       
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: result.type === 'mock' ? result.text : `He generado la consulta para esto. Aquí están los resultados:`,
-        sql: result.type === 'sql' ? result.sql : undefined,
+        content: result.type === 'mock' 
+          ? (result as any).text 
+          : `He generado la consulta para esto. Aquí están los resultados:`,
+        sql: result.type === 'sql' ? (result as any).sql : undefined,
         data: simulatedData
       };
 
@@ -127,7 +128,7 @@ export const AdminDashboard = () => {
               <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[80%] ${msg.role === 'user' ? 'bg-blue-600 text-white' : 'bg-white border border-slate-200 text-gray-800'} rounded-2xl p-4 shadow-sm`}>
                   <div className="flex items-center gap-2 mb-2 border-b border-white/10 pb-2">
-                    {msg.role === 'user' ? <User className="w-4 h-4" /> : <Server className="w-4 h-4 text-emerald-600" />}
+                    {msg.role === 'user' ? <UserIcon className="w-4 h-4" /> : <Server className="w-4 h-4 text-emerald-600" />}
                     <span className="text-xs font-semibold opacity-75">{msg.role === 'user' ? 'Tú' : 'Sistema'}</span>
                   </div>
                   
