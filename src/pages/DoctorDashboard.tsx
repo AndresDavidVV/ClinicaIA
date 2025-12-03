@@ -1,8 +1,144 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
 import { getAIOpinion } from '../lib/openai';
 import { LogOut, Search, User, FileText, Brain } from 'lucide-react';
+
+// Hardcoded demo data
+const DEMO_PATIENTS: Record<string, any> = {
+  '1001': {
+    id: 'demo-1001',
+    full_name: 'Juan Perez',
+    cedula: '1001',
+    birth_date: '1980-05-15',
+    gender: 'M',
+    contact_info: { phone: '5553001', address: 'Calle 1 #10-20' }
+  },
+  '1002': {
+    id: 'demo-1002',
+    full_name: 'Ana Gomez',
+    cedula: '1002',
+    birth_date: '1975-08-22',
+    gender: 'F',
+    contact_info: { phone: '5553002', address: 'Av. Central 45' }
+  },
+  '1003': {
+    id: 'demo-1003',
+    full_name: 'Roberto Diaz',
+    cedula: '1003',
+    birth_date: '1960-11-30',
+    gender: 'M',
+    contact_info: { phone: '5553003', address: 'Barrio Norte' }
+  },
+  '1004': {
+    id: 'demo-1004',
+    full_name: 'Lucia Torres',
+    cedula: '1004',
+    birth_date: '1992-02-14',
+    gender: 'F',
+    contact_info: { phone: '5553004', address: 'Conjunto Residencial Los Pinos' }
+  },
+  '1005': {
+    id: 'demo-1005',
+    full_name: 'Miguel Angel Rodriguez',
+    cedula: '1005',
+    birth_date: '1955-01-10',
+    gender: 'M',
+    contact_info: { phone: '5553005', address: 'Calle 100' }
+  }
+};
+
+const DEMO_RECORDS: Record<string, any[]> = {
+  '1001': [
+    {
+      id: 'rec-1001-2',
+      patient_id: 'demo-1001',
+      record_date: '2023-02-20T00:00:00Z',
+      type: 'examen',
+      description: 'Resultados de laboratorio.',
+      diagnosis: 'Prediabetes',
+      treatment: 'Metformina 850mg si no mejora con dieta.',
+      notes: 'Hemoglobina glicosilada en 5.8%.'
+    },
+    {
+      id: 'rec-1001-1',
+      patient_id: 'demo-1001',
+      record_date: '2023-01-15T00:00:00Z',
+      type: 'consulta',
+      description: 'Paciente refiere dolores de cabeza constantes y sed excesiva.',
+      diagnosis: 'Hipertensión arterial grado 1',
+      treatment: 'Losartán 50mg cada 12h, dieta baja en sodio.',
+      notes: 'Se solicita glicemia en ayunas.'
+    }
+  ],
+  '1002': [
+    {
+      id: 'rec-1002-3',
+      patient_id: 'demo-1002',
+      record_date: '2023-07-05T00:00:00Z',
+      type: 'consulta',
+      description: 'Revisión de biopsia. El médico oncólogo anterior indicó que "no era nada grave" verbalmente a pesar del reporte.',
+      diagnosis: 'Carcinoma Ductal Infiltrante Grado 3',
+      treatment: 'Mastectomía radical modificada + Quimioterapia.',
+      notes: 'ATENCIÓN: El reporte patológico confirma malignidad agresiva. La IA detecta discrepancia con la nota verbal previa reportada por paciente.'
+    },
+    {
+      id: 'rec-1002-2',
+      patient_id: 'demo-1002',
+      record_date: '2023-06-25T00:00:00Z',
+      type: 'examen',
+      description: 'Mamografía BIRADS 4C.',
+      diagnosis: 'Carcinoma Ductal Infiltrante',
+      treatment: 'Biopsia core.',
+      notes: 'Se requiere confirmación histopatológica urgente.'
+    },
+    {
+      id: 'rec-1002-1',
+      patient_id: 'demo-1002',
+      record_date: '2023-06-10T00:00:00Z',
+      type: 'consulta',
+      description: 'Nódulo palpable en mama derecha detectado en autoexamen.',
+      diagnosis: 'Sospecha de Ca de Mama',
+      treatment: 'Mamografía y Ecografía mamaria.',
+      notes: 'Paciente ansiosa.'
+    }
+  ],
+  '1003': [
+    {
+      id: 'rec-1003-1',
+      patient_id: 'demo-1003',
+      record_date: '2023-03-10T00:00:00Z',
+      type: 'urgencia',
+      description: 'Dificultad respiratoria severa.',
+      diagnosis: 'Exacerbación de EPOC',
+      treatment: 'Nebulizaciones con Ipratropio/Salbutamol, Corticoides IV.',
+      notes: 'Saturación 82% al ingreso.'
+    }
+  ],
+  '1004': [
+    {
+      id: 'rec-1004-1',
+      patient_id: 'demo-1004',
+      record_date: '2023-08-01T00:00:00Z',
+      type: 'consulta',
+      description: 'Control prenatal semana 24. Cefalea.',
+      diagnosis: 'Preeclampsia leve',
+      treatment: 'Alfametildopa 250mg cada 8h.',
+      notes: 'Monitoreo de presión arterial diario.'
+    }
+  ],
+  '1005': [
+    {
+      id: 'rec-1005-1',
+      patient_id: 'demo-1005',
+      record_date: '2023-09-15T00:00:00Z',
+      type: 'examen',
+      description: 'Electrocardiograma de rutina.',
+      diagnosis: 'Fibrilación Auricular',
+      treatment: 'Anticoagulación con Warfarina.',
+      notes: 'Riesgo de ACV elevado.'
+    }
+  ]
+};
 
 export const DoctorDashboard = () => {
   const { logout, user } = useAuth();
@@ -21,42 +157,28 @@ export const DoctorDashboard = () => {
     setPatient(null);
     setAiOpinion('');
     
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
     try {
-      // Fetch Patient
-      const { data: patients, error: pError } = await supabase
-        .from('patients')
-        .select('*')
-        .eq('cedula', cedula)
-        .single();
-
-      if (pError) {
-        console.error('Error fetching patient:', pError);
-        alert(`Error: ${pError.message || 'Paciente no encontrado. Verifica que la tabla exista en Supabase.'}`);
+      // Search in hardcoded data
+      const foundPatient = DEMO_PATIENTS[cedula];
+      
+      if (!foundPatient) {
+        alert('Paciente no encontrado. Prueba con cédulas: 1001, 1002, 1003, 1004, 1005');
         setLoading(false);
         return;
       }
 
-      if (!patients) {
-        alert('Paciente no encontrado');
-        setLoading(false);
-        return;
-      }
+      setPatient(foundPatient);
 
-      setPatient(patients);
-
-      // Fetch Records
-      const { data: recs, error: _rError } = await supabase
-        .from('medical_records')
-        .select('*')
-        .eq('patient_id', patients.id)
-        .order('record_date', { ascending: false });
-
-      const history = recs || [];
+      // Get records for this patient
+      const history = DEMO_RECORDS[cedula] || [];
       setRecords(history);
 
       // Trigger AI Analysis
       setAnalyzing(true);
-      const fullHistory = { patient: patients, history };
+      const fullHistory = { patient: foundPatient, history };
       const opinion = await getAIOpinion(fullHistory);
       setAiOpinion(opinion || 'No se pudo generar una opinión.');
       setAnalyzing(false);
