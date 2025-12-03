@@ -13,7 +13,6 @@ export const LoginScreen = () => {
     e.preventDefault();
     if (phone.length > 5) {
       setStep('otp');
-      // Simulation: Show OTP notification
       setShowOtpNotification(true);
       setTimeout(() => setShowOtpNotification(false), 5000);
     }
@@ -21,7 +20,7 @@ export const LoginScreen = () => {
 
   const handleOtpSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (otp === '123456' || otp.length > 0) { // Allow any OTP for demo
+    if (otp === '123456' || otp.length > 0) {
       setStep('role');
     }
   };
@@ -41,15 +40,15 @@ export const LoginScreen = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
       
-      {/* OTP Toast Simulation - Enhanced */}
+      {/* OTP Toast */}
       {showOtpNotification && (
-        <div className="fixed top-4 right-4 max-w-sm bg-white rounded-2xl shadow-2xl border-l-4 border-green-500 p-5 flex gap-4 animate-slide-in z-50 backdrop-blur-sm bg-white/95">
+        <div className="fixed top-4 right-4 w-80 bg-white rounded-2xl shadow-2xl border-l-4 border-green-500 p-5 flex gap-4 animate-slide-in z-50 backdrop-blur-sm bg-white/95">
           <div className="bg-gradient-to-br from-green-400 to-green-500 p-3 rounded-xl shadow-lg">
             <CheckCircle2 className="w-6 h-6 text-white" />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <Sparkles className="w-4 h-4 text-green-500" />
+              <Sparkles className="w-4 h-4 text-green-500 flex-shrink-0" />
               <h4 className="font-bold text-gray-900 text-sm">WhatsApp</h4>
             </div>
             <p className="text-sm text-gray-700">Código ClinicaIA:</p>
@@ -58,23 +57,20 @@ export const LoginScreen = () => {
         </div>
       )}
 
-      <div className="relative z-10 w-full max-w-md mx-auto px-4">
-        {/* Main Card with Glassmorphism */}
-        <div className="glass bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/50 animate-scale-in">
-          {/* Header with enhanced gradient */}
-          <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 p-8 text-center relative overflow-hidden">
-            {/* Animated background pattern */}
+      {/* Main Container - Fixed width */}
+      <div className="relative z-10" style={{ width: '100%', maxWidth: '420px' }}>
+        <div className="glass bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/50 animate-scale-in" style={{ width: '100%', boxSizing: 'border-box' }}>
+          
+          {/* Header */}
+          <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 p-8 text-center relative overflow-hidden" style={{ boxSizing: 'border-box' }}>
             <div className="absolute inset-0 opacity-20">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] [background-size:20px_20px]"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)]" style={{ backgroundSize: '20px 20px' }}></div>
             </div>
-            
-            {/* Shimmer effect overlay */}
             <div className="absolute inset-0 shimmer opacity-30"></div>
             
             <div className="relative z-10">
-              {/* Icon with glow effect */}
-              <div className="mx-auto bg-white/20 w-24 h-24 rounded-3xl rotate-3 flex items-center justify-center mb-6 backdrop-blur-md shadow-glow border-2 border-white/30 transition-transform hover:rotate-6">
-                <Activity className="w-12 h-12 text-white -rotate-3 drop-shadow-lg" />
+              <div className="mx-auto bg-white/20 w-20 h-20 rounded-3xl rotate-3 flex items-center justify-center mb-6 backdrop-blur-md shadow-glow border-2 border-white/30 transition-transform hover:rotate-6">
+                <Activity className="w-10 h-10 text-white -rotate-3 drop-shadow-lg" />
               </div>
               <h1 className="text-3xl font-black text-white mb-2 tracking-tight drop-shadow-lg">
                 ClinicaIA
@@ -86,25 +82,26 @@ export const LoginScreen = () => {
           </div>
 
           {/* Content Area */}
-          <div className="p-6 bg-white/50">
+          <div className="p-6 bg-white/50" style={{ boxSizing: 'border-box' }}>
             {step === 'phone' && (
-              <form onSubmit={handlePhoneSubmit} className="space-y-5 animate-fade-in w-full">
-                <div className="text-center mb-4">
+              <form onSubmit={handlePhoneSubmit} className="animate-fade-in" style={{ width: '100%', boxSizing: 'border-box' }}>
+                <div className="text-center mb-5">
                   <h2 className="text-2xl font-black text-slate-900 mb-1">Acceso Seguro</h2>
                   <p className="text-slate-500 text-sm">Ingresa tu móvil para recibir el código</p>
                 </div>
                 
-                <div className="relative group">
-                  <div className="absolute left-0 top-0 bottom-0 pl-4 flex items-center pointer-events-none border-r-2 border-gray-200 bg-gradient-to-b from-gray-50 to-gray-100 rounded-l-xl w-[85px] justify-center shadow-sm">
-                    <span className="text-base font-bold text-gray-700 flex items-center gap-2">
-                      🇨🇴 <span className="text-sm">+57</span>
+                <div className="relative mb-5" style={{ width: '100%' }}>
+                  <div className="absolute left-0 top-0 bottom-0 pl-3 flex items-center pointer-events-none border-r-2 border-gray-200 bg-gradient-to-b from-gray-50 to-gray-100 rounded-l-xl" style={{ width: '75px' }}>
+                    <span className="text-sm font-bold text-gray-700 flex items-center gap-1">
+                      🇨🇴 <span>+57</span>
                     </span>
                   </div>
                   <input
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full max-w-full pl-[100px] pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all font-semibold text-gray-900 placeholder:text-gray-400 shadow-sm hover:shadow-md text-sm"
+                    className="bg-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all font-semibold text-gray-900 placeholder:text-gray-400 shadow-sm hover:shadow-md text-sm"
+                    style={{ width: '100%', paddingLeft: '90px', paddingRight: '16px', paddingTop: '12px', paddingBottom: '12px', boxSizing: 'border-box' }}
                     placeholder="300 123 4567"
                     required
                     autoFocus
@@ -113,20 +110,21 @@ export const LoginScreen = () => {
 
                 <button
                   type="submit"
-                  className="w-full max-w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 flex items-center justify-center gap-2 group text-sm"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 flex items-center justify-center gap-2 group text-sm mb-4"
+                  style={{ width: '100%', boxSizing: 'border-box' }}
                 >
                   Enviar Código 
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 
-                <p className="text-xs text-center text-slate-500 mt-4 leading-relaxed">
+                <p className="text-xs text-center text-slate-500 leading-relaxed">
                   Al continuar, aceptas los <span className="font-semibold text-blue-600">términos</span> y <span className="font-semibold text-blue-600">política de privacidad</span> de datos médicos.
                 </p>
               </form>
             )}
 
             {step === 'otp' && (
-              <form onSubmit={handleOtpSubmit} className="space-y-5 animate-fade-in w-full">
+              <form onSubmit={handleOtpSubmit} className="animate-fade-in" style={{ width: '100%', boxSizing: 'border-box' }}>
                 <div className="text-center mb-6">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
                     <Lock className="w-8 h-8 text-blue-600" />
@@ -137,7 +135,7 @@ export const LoginScreen = () => {
                   </p>
                 </div>
 
-                <div className="relative">
+                <div className="relative mb-5" style={{ width: '100%' }}>
                   <div className="absolute left-4 top-4">
                     <Lock className="w-5 h-5 text-gray-400" />
                   </div>
@@ -145,7 +143,8 @@ export const LoginScreen = () => {
                     type="text"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
-                    className="w-full max-w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-center tracking-[0.5em] font-mono text-xl font-black text-slate-900 bg-gray-50 shadow-sm"
+                    className="border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-center tracking-[0.5em] font-mono text-xl font-black text-slate-900 bg-gray-50 shadow-sm"
+                    style={{ width: '100%', paddingLeft: '48px', paddingRight: '16px', paddingTop: '12px', paddingBottom: '12px', boxSizing: 'border-box' }}
                     placeholder="000000"
                     maxLength={6}
                     required
@@ -155,12 +154,13 @@ export const LoginScreen = () => {
 
                 <button
                   type="submit"
-                  className="w-full max-w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl flex items-center justify-center gap-2 text-sm"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl flex items-center justify-center gap-2 text-sm mb-4"
+                  style={{ width: '100%', boxSizing: 'border-box' }}
                 >
                   Verificar Acceso <ArrowRight className="w-5 h-5" />
                 </button>
                 
-                <div className="text-center space-y-3 pt-2">
+                <div className="text-center space-y-3">
                   <button 
                     type="button" 
                     onClick={() => setShowOtpNotification(true)}
@@ -172,7 +172,8 @@ export const LoginScreen = () => {
                   <button 
                     type="button" 
                     onClick={() => setStep('phone')}
-                    className="block w-full text-sm text-gray-500 hover:text-gray-700 transition-colors font-medium"
+                    className="block text-sm text-gray-500 hover:text-gray-700 transition-colors font-medium"
+                    style={{ width: '100%' }}
                   >
                     ← Cambiar número
                   </button>
@@ -181,7 +182,7 @@ export const LoginScreen = () => {
             )}
 
             {step === 'role' && (
-              <div className="space-y-4 animate-fade-in w-full">
+              <div className="animate-fade-in" style={{ width: '100%', boxSizing: 'border-box' }}>
                 <div className="text-center mb-6">
                   <h2 className="text-2xl font-black text-slate-900 mb-1">Selecciona tu Perfil</h2>
                   <p className="text-slate-500 text-sm">Elige el módulo al que deseas ingresar</p>
@@ -189,37 +190,39 @@ export const LoginScreen = () => {
 
                 <button
                   onClick={() => handleRoleSelect('doctor')}
-                  className="w-full p-5 border-2 border-gray-200 hover:border-blue-500 rounded-2xl flex items-center gap-5 transition-all hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 group shadow-sm hover:shadow-lg"
+                  className="p-4 border-2 border-gray-200 hover:border-blue-500 rounded-2xl flex items-center gap-4 transition-all hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 group shadow-sm hover:shadow-lg mb-4"
+                  style={{ width: '100%', boxSizing: 'border-box' }}
                 >
-                  <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-4 rounded-2xl group-hover:from-blue-600 group-hover:to-indigo-600 transition-all shadow-md group-hover:shadow-glow">
-                    <Stethoscope className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" />
+                  <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-3 rounded-2xl group-hover:from-blue-600 group-hover:to-indigo-600 transition-all shadow-md group-hover:shadow-glow flex-shrink-0">
+                    <Stethoscope className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
                   </div>
-                  <div className="text-left flex-1">
+                  <div className="text-left flex-1 min-w-0">
                     <h3 className="font-black text-slate-900 text-lg">Médico / Especialista</h3>
                     <p className="text-xs text-slate-500 mt-1">Consulta historias clínicas y opiniones IA</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
                 </button>
 
                 <button
                   onClick={() => handleRoleSelect('admin')}
-                  className="w-full p-5 border-2 border-gray-200 hover:border-emerald-500 rounded-2xl flex items-center gap-5 transition-all hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 group shadow-sm hover:shadow-lg"
+                  className="p-4 border-2 border-gray-200 hover:border-emerald-500 rounded-2xl flex items-center gap-4 transition-all hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 group shadow-sm hover:shadow-lg"
+                  style={{ width: '100%', boxSizing: 'border-box' }}
                 >
-                  <div className="bg-gradient-to-br from-emerald-100 to-emerald-200 p-4 rounded-2xl group-hover:from-emerald-600 group-hover:to-teal-600 transition-all shadow-md group-hover:shadow-lg group-hover:shadow-emerald-500/30">
-                    <Briefcase className="w-7 h-7 text-emerald-600 group-hover:text-white transition-colors" />
+                  <div className="bg-gradient-to-br from-emerald-100 to-emerald-200 p-3 rounded-2xl group-hover:from-emerald-600 group-hover:to-teal-600 transition-all shadow-md group-hover:shadow-lg group-hover:shadow-emerald-500/30 flex-shrink-0">
+                    <Briefcase className="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" />
                   </div>
-                  <div className="text-left flex-1">
+                  <div className="text-left flex-1 min-w-0">
                     <h3 className="font-black text-slate-900 text-lg">Administrativo</h3>
                     <p className="text-xs text-slate-500 mt-1">Analítica operativa y gestión de datos</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
+                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
                 </button>
               </div>
             )}
           </div>
           
           {/* Footer */}
-          <div className="bg-gradient-to-r from-slate-50 to-gray-50 border-t border-slate-200/50 p-4 text-center">
+          <div className="bg-gradient-to-r from-slate-50 to-gray-50 border-t border-slate-200/50 p-4 text-center" style={{ boxSizing: 'border-box' }}>
             <p className="text-xs text-slate-500 font-semibold tracking-wide">
               ClinicaIA Secure Access • v2.0.0
             </p>
