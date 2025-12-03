@@ -58,11 +58,11 @@ export const LoginScreen = () => {
         </div>
       )}
 
-      <div className="relative z-10 w-full max-w-lg lg:w-[30vw] min-w-[320px]">
+      <div className="relative z-10 w-full max-w-md mx-auto px-4">
         {/* Main Card with Glassmorphism */}
         <div className="glass bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/50 animate-scale-in">
           {/* Header with enhanced gradient */}
-          <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 p-10 text-center relative overflow-hidden">
+          <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 p-8 text-center relative overflow-hidden">
             {/* Animated background pattern */}
             <div className="absolute inset-0 opacity-20">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] [background-size:20px_20px]"></div>
@@ -86,9 +86,9 @@ export const LoginScreen = () => {
           </div>
 
           {/* Content Area */}
-          <div className="p-8 bg-white/50">
+          <div className="p-6 bg-white/50">
             {step === 'phone' && (
-              <form onSubmit={handlePhoneSubmit} className="space-y-6 animate-fade-in max-w-sm mx-auto">
+              <form onSubmit={handlePhoneSubmit} className="space-y-5 animate-fade-in w-full">
                 <div className="text-center mb-4">
                   <h2 className="text-2xl font-black text-slate-900 mb-1">Acceso Seguro</h2>
                   <p className="text-slate-500 text-sm">Ingresa tu móvil para recibir el código</p>
@@ -104,7 +104,7 @@ export const LoginScreen = () => {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full pl-[100px] pr-5 py-4 bg-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all font-semibold text-gray-900 placeholder:text-gray-400 shadow-sm hover:shadow-md"
+                    className="w-full max-w-full pl-[100px] pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all font-semibold text-gray-900 placeholder:text-gray-400 shadow-sm hover:shadow-md text-sm"
                     placeholder="300 123 4567"
                     required
                     autoFocus
@@ -113,7 +113,7 @@ export const LoginScreen = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 flex items-center justify-center gap-2 group"
+                  className="w-full max-w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-[0.98] text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 flex items-center justify-center gap-2 group text-sm"
                 >
                   Enviar Código 
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -126,7 +126,7 @@ export const LoginScreen = () => {
             )}
 
             {step === 'otp' && (
-              <form onSubmit={handleOtpSubmit} className="space-y-6 animate-fade-in max-w-sm mx-auto">
+              <form onSubmit={handleOtpSubmit} className="space-y-5 animate-fade-in w-full">
                 <div className="text-center mb-6">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
                     <Lock className="w-8 h-8 text-blue-600" />
@@ -145,7 +145,7 @@ export const LoginScreen = () => {
                     type="text"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-center tracking-[0.6em] font-mono text-2xl font-black text-slate-900 bg-gray-50 shadow-sm"
+                    className="w-full max-w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-center tracking-[0.5em] font-mono text-xl font-black text-slate-900 bg-gray-50 shadow-sm"
                     placeholder="000000"
                     maxLength={6}
                     required
@@ -155,7 +155,7 @@ export const LoginScreen = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl flex items-center justify-center gap-2"
+                  className="w-full max-w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/30 hover:shadow-xl flex items-center justify-center gap-2 text-sm"
                 >
                   Verificar Acceso <ArrowRight className="w-5 h-5" />
                 </button>
@@ -181,7 +181,7 @@ export const LoginScreen = () => {
             )}
 
             {step === 'role' && (
-              <div className="space-y-4 animate-fade-in max-w-sm mx-auto">
+              <div className="space-y-4 animate-fade-in w-full">
                 <div className="text-center mb-6">
                   <h2 className="text-2xl font-black text-slate-900 mb-1">Selecciona tu Perfil</h2>
                   <p className="text-slate-500 text-sm">Elige el módulo al que deseas ingresar</p>
