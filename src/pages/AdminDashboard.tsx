@@ -100,21 +100,21 @@ export const AdminDashboard = () => {
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-slate-50 via-emerald-50/30 to-teal-50/20">
       {/* Header */}
-      <header className="bg-gradient-admin backdrop-blur-xl border-b border-emerald-200/50 px-6 py-4 flex justify-between items-center shadow-colored-emerald relative overflow-hidden">
+      <header className="bg-gradient-admin backdrop-blur-xl border-b border-emerald-200/50 px-6 sm:px-8 py-5 flex justify-between items-center shadow-colored-emerald relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 via-transparent to-teal-600/10"></div>
-        <div className="flex items-center gap-3 relative z-10">
-          <div className="bg-white/20 backdrop-blur-md p-2.5 rounded-xl shadow-glow-emerald border border-white/30">
+        <div className="flex items-center gap-4 relative z-10">
+          <div className="bg-white/20 backdrop-blur-md p-3 rounded-xl shadow-glow-emerald border border-white/30">
             <BarChart2 className="w-6 h-6 text-white" />
           </div>
           <div>
             <h1 className="font-black text-white text-xl tracking-tight drop-shadow-lg">
               ClinicaIA <span className="font-normal text-emerald-100">| Analytics</span>
             </h1>
-            <p className="text-xs text-emerald-100/80 font-medium">Análisis Inteligente de Datos</p>
+            <p className="text-xs text-emerald-100/80 font-medium mt-0.5">Análisis Inteligente de Datos</p>
           </div>
         </div>
         <div className="flex items-center gap-4 relative z-10">
-           <div className="text-right hidden md:block bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg border border-white/20">
+           <div className="text-right hidden md:block bg-white/10 backdrop-blur-md px-5 py-2.5 rounded-lg border border-white/20">
               <p className="text-sm font-semibold text-white">{user?.name}</p>
               <p className="text-xs text-emerald-100/90">Administrador</p>
             </div>
@@ -127,20 +127,20 @@ export const AdminDashboard = () => {
         </div>
       </header>
 
-      <div className="flex-1 flex overflow-hidden max-w-7xl mx-auto w-full p-6 gap-6">
+      <div className="flex-1 flex overflow-hidden max-w-7xl mx-auto w-full p-6 sm:p-8 gap-6">
         {/* Chat Interface */}
         <div className="flex-1 flex flex-col bg-white/80 backdrop-blur-xl rounded-3xl shadow-deep-lg border border-white/50 overflow-hidden">
           
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-slate-50/50 via-white/30 to-emerald-50/20" ref={scrollRef}>
+          <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-5 bg-gradient-to-b from-slate-50/50 via-white/30 to-emerald-50/20" ref={scrollRef}>
             {messages.map((msg) => (
               <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
-                <div className={`max-w-[80%] ${msg.role === 'user' 
+                <div className={`max-w-[85%] sm:max-w-[80%] ${msg.role === 'user' 
                   ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-colored-blue hover:shadow-colored-blue hover:scale-[1.02]' 
                   : 'bg-white/90 backdrop-blur-sm border border-emerald-100/50 text-gray-800 shadow-deep hover:shadow-deep-lg hover:scale-[1.01]'} 
-                  rounded-2xl p-5 transition-all duration-300 card-modern`}>
-                  <div className={`flex items-center gap-2.5 mb-3 ${msg.role === 'user' ? 'border-b border-white/20' : 'border-b border-emerald-100'} pb-2.5`}>
-                    <div className={`p-1.5 rounded-lg ${msg.role === 'user' ? 'bg-white/20' : 'bg-emerald-100'}`}>
+                  rounded-2xl p-5 sm:p-6 transition-all duration-300 card-modern`}>
+                  <div className={`flex items-center gap-3 mb-4 ${msg.role === 'user' ? 'border-b border-white/20' : 'border-b border-emerald-100'} pb-3`}>
+                    <div className={`p-2 rounded-lg ${msg.role === 'user' ? 'bg-white/20' : 'bg-emerald-100'}`}>
                       {msg.role === 'user' ? <UserIcon className="w-4 h-4 text-white" /> : <Server className="w-4 h-4 text-emerald-600" />}
                     </div>
                     <span className={`text-xs font-bold ${msg.role === 'user' ? 'text-white/90' : 'text-emerald-700'}`}>
@@ -152,8 +152,8 @@ export const AdminDashboard = () => {
 
                   {/* SQL Code Block */}
                   {msg.sql && (
-                    <div className="mt-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400 overflow-x-auto border border-emerald-500/20 shadow-glow-emerald">
-                      <div className="flex items-center gap-2 text-emerald-300/70 mb-2 text-[10px] uppercase tracking-wider font-semibold">
+                    <div className="mt-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-xl p-4 sm:p-5 font-mono text-xs text-emerald-400 overflow-x-auto border border-emerald-500/20 shadow-glow-emerald">
+                      <div className="flex items-center gap-2 text-emerald-300/70 mb-3 text-[10px] uppercase tracking-wider font-semibold">
                         <Database className="w-3.5 h-3.5" /> SQL Generado
                       </div>
                       <code className="block text-emerald-300/90 leading-relaxed">{msg.sql}</code>
@@ -162,20 +162,20 @@ export const AdminDashboard = () => {
 
                   {/* Data Result Visualization */}
                   {msg.data && (
-                    <div className="mt-4 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-emerald-50 rounded-xl p-5 border border-emerald-200/50 shadow-soft">
+                    <div className="mt-5 bg-gradient-to-br from-emerald-50 via-teal-50/50 to-emerald-50 rounded-xl p-5 sm:p-6 border border-emerald-200/50 shadow-soft">
                       {msg.data.type === 'single' && (
-                         <div className="flex items-baseline gap-2">
-                           <div className="text-4xl font-black text-emerald-700 bg-white/60 px-4 py-2 rounded-xl shadow-sm">{msg.data.value}</div>
+                         <div className="flex items-baseline gap-3">
+                           <div className="text-4xl font-black text-emerald-700 bg-white/60 px-5 py-3 rounded-xl shadow-sm">{msg.data.value}</div>
                            <div className="text-xs text-emerald-600/70 font-semibold uppercase tracking-wider">Resultado</div>
                          </div>
                       )}
                       {msg.data.type === 'list' && (
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto -mx-1">
                           <table className="w-full text-sm text-left">
                             <thead>
                               <tr className="bg-gradient-to-r from-emerald-100 to-teal-100">
                                 {msg.data.columns.map((col: string) => (
-                                  <th key={col} className="px-4 py-3 text-xs font-bold text-emerald-900 uppercase tracking-wider border-b-2 border-emerald-200">
+                                  <th key={col} className="px-5 py-3.5 text-xs font-bold text-emerald-900 uppercase tracking-wider border-b-2 border-emerald-200">
                                     {col}
                                   </th>
                                 ))}
@@ -190,7 +190,7 @@ export const AdminDashboard = () => {
                                   }`}
                                 >
                                   {row.map((cell: any, j: number) => (
-                                    <td key={j} className="px-4 py-3 font-semibold text-slate-700">
+                                    <td key={j} className="px-5 py-3.5 font-semibold text-slate-700">
                                       {cell}
                                     </td>
                                   ))}
@@ -207,7 +207,7 @@ export const AdminDashboard = () => {
             ))}
             {loading && (
               <div className="flex justify-start animate-fade-in">
-                <div className="bg-white/90 backdrop-blur-sm border border-emerald-200/50 rounded-2xl p-4 shadow-deep flex items-center gap-3 text-emerald-700 text-sm font-medium">
+                <div className="bg-white/90 backdrop-blur-sm border border-emerald-200/50 rounded-2xl p-5 shadow-deep flex items-center gap-3 text-emerald-700 text-sm font-medium">
                   <Loader2 className="w-5 h-5 animate-spin text-emerald-600" />
                   <span>Analizando base de datos...</span>
                 </div>
@@ -216,8 +216,8 @@ export const AdminDashboard = () => {
           </div>
 
           {/* Input Area */}
-          <div className="p-6 bg-gradient-to-r from-white/80 via-emerald-50/30 to-white/80 backdrop-blur-xl border-t border-emerald-100/50">
-            <form onSubmit={handleSend} className="relative flex items-center gap-3">
+          <div className="p-6 sm:p-8 bg-gradient-to-r from-white/80 via-emerald-50/30 to-white/80 backdrop-blur-xl border-t border-emerald-100/50">
+            <form onSubmit={handleSend} className="relative flex items-center gap-4">
               <div className="relative flex-1">
                 <input
                   type="text"
@@ -231,12 +231,12 @@ export const AdminDashboard = () => {
               <button 
                 type="submit" 
                 disabled={loading || !input.trim()}
-                className="p-4 bg-gradient-admin hover:from-emerald-600 hover:to-emerald-700 disabled:from-slate-300 disabled:to-slate-400 text-white rounded-2xl transition-all shadow-colored-emerald hover:shadow-glow-emerald-lg hover:scale-105 disabled:scale-100 disabled:shadow-none flex items-center justify-center"
+                className="p-4 bg-gradient-admin hover:from-emerald-600 hover:to-emerald-700 disabled:from-slate-300 disabled:to-slate-400 text-white rounded-2xl transition-all shadow-colored-emerald hover:shadow-glow-emerald-lg hover:scale-105 disabled:scale-100 disabled:shadow-none flex items-center justify-center flex-shrink-0"
               >
                 <Send className="w-5 h-5" />
               </button>
             </form>
-            <p className="text-center text-xs text-emerald-600/70 mt-3 font-medium">
+            <p className="text-center text-xs text-emerald-600/70 mt-4 font-medium px-2">
               La IA analiza datos operativos. No comparte información sensible del paciente aquí.
             </p>
           </div>

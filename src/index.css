@@ -61,9 +61,26 @@
 }
 
 @layer base {
+  /* CSS Variables for consistent spacing */
+  :root {
+    --spacing-xs: 0.25rem;    /* 4px */
+    --spacing-sm: 0.5rem;     /* 8px */
+    --spacing-md: 1rem;       /* 16px */
+    --spacing-lg: 1.5rem;     /* 24px */
+    --spacing-xl: 2rem;       /* 32px */
+    --spacing-2xl: 3rem;      /* 48px */
+    --spacing-3xl: 4rem;      /* 64px */
+    
+    --container-padding: 1.5rem;
+    --section-gap: 2rem;
+    --element-gap: 1rem;
+    --card-padding: 1.5rem;
+  }
+
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
   }
   
   body {
@@ -73,15 +90,21 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
   }
 
   html {
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
   }
 
   *:focus-visible {
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
