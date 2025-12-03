@@ -29,7 +29,14 @@ export const DoctorDashboard = () => {
         .eq('cedula', cedula)
         .single();
 
-      if (pError || !patients) {
+      if (pError) {
+        console.error('Error fetching patient:', pError);
+        alert(`Error: ${pError.message || 'Paciente no encontrado. Verifica que la tabla exista en Supabase.'}`);
+        setLoading(false);
+        return;
+      }
+
+      if (!patients) {
         alert('Paciente no encontrado');
         setLoading(false);
         return;
